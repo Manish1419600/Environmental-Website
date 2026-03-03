@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <meta name="theme-color" content="#2ecc71">
+    <title>Local Impact Tool - EcoAction Hub</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Impact Tool specific styles */
+        .impact-tool-hero {
+            background: linear-gradient(135deg, #27ae60, #2980b9);
+            padding: 4rem 2rem;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .weather-animation {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            height: 150px;
+            margin: 20px auto;
+            overflow: hidden;
+            border-radius: 10px;
+            background: linear-gradient(to bottom, #87CEEB, #E0F6FF);
+        }
+        
+        .sun {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: #f1c40f;
+            border-radius: 50%;
+            box-shadow: 0 0 30px #f1c40f;
+            animation: rotate 20s linear infinite;
+        }
+        
+        .sun::after {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border: 2px solid #f1c40f;
+            border-radius: 50%;
+            animation: pulse 2s ease-out infinite;
+        }
+        
+        .cloud {
+            position: absolute;
+            top: 40px;
+            left: 20px;
+            width: 80px;
+            height: 30px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50px;
+            filter: blur(3px);
+            animation: float-cloud 15s ease-in-out infinite;
+        }
+        
+        .cloud::before,
+        .cloud::after {
+            content: '';
+            position: absolute;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+        }
+        
+        .cloud::before {
+            width: 40px;
+            height: 40px;
+            top: -20px;
+            left: 10px;
+        }
+        
+        .cloud::after {
+            width: 30px;
+            height: 30px;
+            top: -15px;
+            left: 30px;
+        }
+        
+        .cloud:nth-child(2) {
+            top: 60px;
+            left: 200px;
+            animation-delay: 2s;
+            opacity: 0.7;
+        }
+        
+        @keyframes float-cloud {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(30px); }
+        }
+        
+        .location-search {
+            max-width: 600px;
+            margin: 2rem auto;
+            display: flex;
+            gap: 1rem;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .location-search input {
+            flex: 1;
+            padding: 1rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .location-search input:focus {
+            transform: scale(1.02);
+            outline: none;
+            box-shadow: 0 0 20px rgba(255,255,255,0.3);
+        }
+        
+        .location-search button {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            background: #e74c3c;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .location-search button:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .animated-gauge {
+            position: relative;
+            width: 200px;
+            height: 120px;
+            margin: 20px auto;
+        }
+        
+        .gauge {
+            width: 100%;
+            height: auto;
+        }
+        
+        .gauge-value {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -30%);
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            animation: countUp 1s ease-out;
+        }
+        
+        .data-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .data-card {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .data-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(46,204,113,0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+        
+        .data-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+        }
+        
+        .data-card h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .data-card i {
+            color: #27ae60;
+            font-size: 1.5rem;
+            animation: bounce 2s infinite;
+        }
+        
+        .data-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #27ae60;
+            margin: 1rem 0;
+            animation: countUp 1s ease-out;
+        }
+        
+        .map-container {
+            height: 400px;
+            background: #ecf0f1;
+            border-radius: 10px;
+            margin: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .footprint-calculator {
+            max-width: 800px;
+            margin: 3rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .calculator-input {
+            margin-bottom: 1.5rem;
+            animation: slideInUp 0.5s ease;
+        }
+        
+        .calculator-input input,
+        .calculator-input select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #ecf0f1;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .calculator-input input:focus,
+        .calculator-input select:focus {
+            outline: none;
+            border-color: #27ae60;
+            transform: scale(1.02);
+        }
+        
+        .result-box {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: #f1f9f1;
+            border-radius: 5px;
+            text-align: center;
+            animation: zoomIn 0.5s ease;
+        }
+        
+        .result-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #27ae60;
+            animation: countUp 1s ease-out;
+        }
+        
+        .recommendations {
+            margin-top: 1rem;
+            text-align: left;
+        }
+        
+        .recommendations li {
+            padding: 0.5rem;
+            margin-bottom: 0.5rem;
+            background: white;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            animation: slideInLeft 0.5s ease;
+            animation-fill-mode: both;
+        }
+        
+        .recommendations li:nth-child(1) { animation-delay: 0.1s; }
+        .recommendations li:nth-child(2) { animation-delay: 0.2s; }
+        .recommendations li:nth-child(3) { animation-delay: 0.3s; }
+        .recommendations li:nth-child(4) { animation-delay: 0.4s; }
+        .recommendations li:nth-child(5) { animation-delay: 0.5s; }
+        
+        .recommendations i {
+            color: #27ae60;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+             <a href="index.html" class="logo">
+               <i class="fas fa-leaf"></i>
+               <span>EcoAction Hub</span>
+            </a>
+
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="impact-tool.html">Impact Tool</a></li>
+                <li><a href="action-hub.html" class="active">Action Hub</a></li>
+                <li><a href="learning-portal.html">Learn</a></li>
+                <li><a href="community.html">Community</a></li>
+                <li><a href="resources.html">Resources</a></li>
+            </ul>
+            <div class="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    
+    <div class="impact-tool-hero">
+        <!-- Weather Animation -->
+        <div class="weather-animation" id="weatherAnimation">
+            <div class="sun"></div>
+            <div class="cloud"></div>
+            <div class="cloud"></div>
+        </div>
+        
+        <h1 class="glow">Find Your Local Environmental Impact</h1>
+        <p>Enter your location to see real-time environmental data and nearby green initiatives</p>
+        
+        <div class="location-search">
+            <input type="text" id="locationInput" placeholder="Enter your city or ZIP code" value="New York">
+            <button onclick="searchLocation()"><i class="fas fa-search"></i> Find</button>
+        </div>
+    </div>
+    
+    <!-- Environmental Data Grid -->
+    <div class="data-grid" id="dataGrid">
+        <div class="data-card">
+            <h3><i class="fas fa-wind"></i> Air Quality Index</h3>
+            <div class="animated-gauge">
+                <svg viewBox="0 0 200 100" class="gauge">
+                    <path d="M20,80 A70,70 0 0,1 180,80" fill="none" stroke="#ecf0f1" stroke-width="20"/>
+                    <path d="M20,80 A70,70 0 0,1 180,80" fill="none" stroke="#2ecc71" stroke-width="20" 
+                          stroke-dasharray="219.8" stroke-dashoffset="219.8" id="gauge-fill"/>
+                    <circle cx="100" cy="80" r="10" fill="#2c3e50" id="gauge-indicator"/>
+                </svg>
+                <div class="gauge-value" id="aqiDisplay">42</div>
+            </div>
+            <div class="data-unit">Good - PM2.5: 8.5 µg/m³</div>
+        </div>
+        
+        <div class="data-card">
+            <h3><i class="fas fa-tint"></i> Water Quality</h3>
+            <div class="data-value" id="waterQuality">85</div>
+            <div class="data-unit">/100 - Excellent</div>
+        </div>
+        
+        <div class="data-card">
+            <h3><i class="fas fa-tree"></i> Green Space Coverage</h3>
+            <div class="data-value" id="greenSpace">23%</div>
+            <div class="data-unit">of total area</div>
+        </div>
+        
+        <div class="data-card">
+            <h3><i class="fas fa-recycle"></i> Recycling Rate</h3>
+            <div class="data-value" id="recyclingRate">34%</div>
+            <div class="data-unit">of total waste</div>
+        </div>
+        
+        <div class="data-card">
+            <h3><i class="fas fa-sun"></i> Solar Potential</h3>
+            <div class="data-value" id="solarPotential">4.2</div>
+            <div class="data-unit">kWh/m²/day</div>
+        </div>
+        
+        <div class="data-card">
+            <h3><i class="fas fa-car"></i> Transportation</h3>
+            <div class="data-value" id="transportEmissions">2.4</div>
+            <div class="data-unit">tons CO₂/year per capita</div>
+        </div>
+    </div>
+    
+    <!-- Interactive Map -->
+    <h2 style="text-align: center; margin-top: 2rem;">Green Infrastructure Map</h2>
+    <div class="map-container" id="mapContainer">
+        <div class="map-placeholder">
+            <i class="fas fa-map-marked-alt"></i>
+            <h3>Interactive Map Loading...</h3>
+            <p>Showing parks, recycling centers, and green spaces in your area</p>
+        </div>
+    </div>
+    
+    <!-- Carbon Footprint Calculator -->
+    <div class="footprint-calculator">
+        <h2 style="text-align: center; margin-bottom: 2rem;">Calculate Your Carbon Footprint</h2>
+        
+        <div class="calculator-input">
+            <label><i class="fas fa-home"></i> Household Size</label>
+            <select id="householdSize">
+                <option value="1">1 person</option>
+                <option value="2">2 people</option>
+                <option value="3">3 people</option>
+                <option value="4">4 people</option>
+                <option value="5">5+ people</option>
+            </select>
+        </div>
+        
+        <div class="calculator-input">
+            <label><i class="fas fa-bolt"></i> Monthly Electricity (kWh)</label>
+            <input type="number" id="electricity" value="300" min="0" step="10">
+        </div>
+        
+        <div class="calculator-input">
+            <label><i class="fas fa-car"></i> Car Travel (miles/week)</label>
+            <input type="number" id="carTravel" value="100" min="0" step="5">
+        </div>
+        
+        <div class="calculator-input">
+            <label><i class="fas fa-plane"></i> Flights (hours/year)</label>
+            <input type="number" id="flights" value="10" min="0" step="1">
+        </div>
+        
+        <div class="calculator-input">
+            <label><i class="fas fa-utensils"></i> Diet Type</label>
+            <select id="diet">
+                <option value="meat-heavy">Meat-heavy</option>
+                <option value="average">Average</option>
+                <option value="vegetarian">Vegetarian</option>
+                <option value="vegan">Vegan</option>
+            </select>
+        </div>
+        
+        <button onclick="calculateFootprint()" class="btn btn-primary" style="width: 100%;">Calculate My Footprint</button>
+        
+        <div class="result-box" id="footprintResult" style="display: none;">
+            <h3>Your Annual Carbon Footprint</h3>
+            <div class="result-number" id="footprintValue">0</div>
+            <div class="data-unit">tons CO₂ per year</div>
+            <div class="recommendations" id="footprintRecommendations"></div>
+        </div>
+    </div>
+    
+    <footer class="footer">
+        <!-- Same footer as index.html -->
+        <div class="footer-container">
+            <!-- ... footer content ... -->
+        </div>
+    </footer>
+
+    <script>
+        function searchLocation() {
+            const location = document.getElementById('locationInput').value;
+            
+            if (!location) {
+                showNotification('Please enter a location', 'error');
+                return;
+            }
+            
+            showNotification(`Loading data for ${location}...`, 'info');
+            
+            // Simulate API call
+            setTimeout(() => {
+                // Update gauge
+                const aqiValue = Math.floor(Math.random() * 50) + 20;
+                document.getElementById('aqiDisplay').textContent = aqiValue;
+                updateGauge(aqiValue);
+                
+                // Update other values
+                document.getElementById('waterQuality').textContent = Math.floor(Math.random() * 30) + 70;
+                document.getElementById('greenSpace').textContent = Math.floor(Math.random() * 15) + 15 + '%';
+                document.getElementById('recyclingRate').textContent = Math.floor(Math.random() * 20) + 25 + '%';
+                document.getElementById('solarPotential').textContent = (Math.random() * 2 + 3).toFixed(1);
+                document.getElementById('transportEmissions').textContent = (Math.random() * 3 + 1).toFixed(1);
+                
+                // Update map
+                document.getElementById('mapContainer').innerHTML = `
+                    <div style="background: #27ae60; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; text-align: center;">
+                        <div>
+                            <i class="fas fa-check-circle" style="font-size: 3rem; margin-bottom: 1rem;"></i>
+                            <h3>Map Loaded for ${location}</h3>
+                            <p>Showing 12 parks, 8 recycling centers, and 5 green spaces</p>
+                        </div>
+                    </div>
+                `;
+                
+                showNotification(`Data updated for ${location}!`, 'success');
+                earnCredits(5);
+            }, 1500);
+        }
+        
+        function updateGauge(value) {
+            const maxValue = 100;
+            const circumference = 219.8;
+            const offset = circumference - (value / maxValue) * circumference;
+            
+            const gaugeFill = document.getElementById('gauge-fill');
+            const indicator = document.getElementById('gauge-indicator');
+            
+            gaugeFill.style.transition = 'stroke-dashoffset 1.5s ease';
+            gaugeFill.style.strokeDashoffset = offset;
+            
+            const angle = (value / maxValue) * 180 - 90;
+            const x = 100 + 70 * Math.cos(angle * Math.PI / 180);
+            const y = 80 + 70 * Math.sin(angle * Math.PI / 180);
+            
+            indicator.style.transition = 'all 1.5s ease';
+            indicator.setAttribute('cx', x);
+            indicator.setAttribute('cy', y);
+        }
+        
+        function calculateFootprint() {
+            const household = parseInt(document.getElementById('householdSize').value);
+            const electricity = parseInt(document.getElementById('electricity').value);
+            const carTravel = parseInt(document.getElementById('carTravel').value);
+            const flights = parseInt(document.getElementById('flights').value);
+            const diet = document.getElementById('diet').value;
+            
+            let footprint = 0;
+            footprint += electricity * 12 * 0.4 / 1000;
+            footprint += carTravel * 52 * 0.2 / 1000;
+            footprint += flights * 90 / 1000;
+            
+            const dietFactors = {
+                'meat-heavy': 3.0,
+                'average': 2.5,
+                'vegetarian': 1.7,
+                'vegan': 1.5
+            };
+            footprint += dietFactors[diet];
+            
+            footprint = footprint / Math.sqrt(household);
+            footprint = Math.round(footprint * 10) / 10;
+            
+            document.getElementById('footprintValue').textContent = footprint;
+            document.getElementById('footprintResult').style.display = 'block';
+            
+            const recommendations = document.getElementById('footprintRecommendations');
+            let recHTML = '<h4>Recommendations to Reduce Your Footprint:</h4><ul>';
+            
+            if (electricity > 200) {
+                recHTML += '<li><i class="fas fa-lightbulb"></i> Switch to LED bulbs and energy-efficient appliances</li>';
+            }
+            if (carTravel > 50) {
+                recHTML += '<li><i class="fas fa-bus"></i> Try public transit or carpooling 1 day a week</li>';
+            }
+            if (diet === 'meat-heavy') {
+                recHTML += '<li><i class="fas fa-carrot"></i> Try meatless Mondays to reduce your impact</li>';
+            }
+            if (flights > 5) {
+                recHTML += '<li><i class="fas fa-plane"></i> Consider video conferencing instead of short flights</li>';
+            }
+            
+            recHTML += '<li><i class="fas fa-tree"></i> Plant a tree to offset remaining emissions</li></ul>';
+            recommendations.innerHTML = recHTML;
+            
+            earnCredits(3);
+        }
+        
+        // Auto-load default location
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                searchLocation();
+                updateGauge(42);
+            }, 500);
+        });
+    </script>
+    
+    <script src="main.js"></script>
+    <script src="animations.js"></script>
+</body>
+</html>

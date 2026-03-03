@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <meta name="theme-color" content="#2ecc71">
+    <title>EcoAction Hub - Protect Our Environment</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+               <i class="fas fa-leaf"></i>
+               <span>EcoAction Hub</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="impact-tool.html">Impact Tool</a></li>
+                <li><a href="action-hub.html">Action Hub</a></li>
+                <li><a href="learning-portal.html">Learn</a></li>
+                <li><a href="community.html">Community</a></li>
+                <li><a href="resources.html">Resources</a></li>
+            </ul>
+            <div class="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section with 3D Earth -->
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Make Your Impact on <br> Environment</h1>
+            <p class="slide-in-up">Join thousands of others taking action for a sustainable future. Your journey starts here.</p>
+            <div class="hero-buttons">
+                <a href="impact-tool.html" class="btn btn-primary pulse">Find Your Impact</a>
+                <a href="action-hub.html" class="btn btn-secondary">Take Action Now</a>
+            </div>
+        </div>
+        
+        <!-- 3D Earth Animation -->
+        <div class="earth-container">
+            <div class="earth-3d">
+                <div class="earth-sphere">
+                    <div class="earth-map"></div>
+                </div>
+                <div class="orbit">
+                    <div class="satellite"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Animated Stats -->
+        <div class="hero-stats">
+            <div class="stat-card">
+                <i class="fas fa-tree"></i>
+                <span class="stat-number" data-target="10234">0</span>
+                <span class="stat-label">Trees Planted</span>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-users"></i>
+                <span class="stat-number" data-target="5678">0</span>
+                <span class="stat-label">Active Members</span>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-recycle"></i>
+                <span class="stat-number" data-target="45890">0</span>
+                <span class="stat-label">kg Waste Reduced</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Features Section -->
+    <section class="features">
+        <h2 class="section-title">How We Help You Make a Difference</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-map-marked-alt"></i>
+                </div>
+                <h3>Local Impact Tool</h3>
+                <p>Discover environmental initiatives and data specific to your location. See real-time air quality, recycling centers, and local green spaces.</p>
+                <a href="impact-tool.html" class="feature-link">Explore near you →</a>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-trophy"></i>
+                </div>
+                <h3>Gamified Actions</h3>
+                <p>Earn Green Credits for every eco-friendly action. Compete with friends and unlock achievement badges as you make a difference.</p>
+                <a href="action-hub.html" class="feature-link">Start earning →</a>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <h3>Interactive Learning</h3>
+                <p>From climate science to sustainable living, explore our engaging courses, quizzes, and multimedia content designed for all ages.</p>
+                <a href="learning-portal.html" class="feature-link">Start learning →</a>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3>Community Hub</h3>
+                <p>Connect with like-minded environmentalists, share your projects, and participate in challenges to inspire others.</p>
+                <a href="community.html" class="feature-link">Join community →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Impact Story Section -->
+    <section class="impact-story">
+        <div class="story-container">
+            <div class="story-content">
+                <span class="story-tag">IMPACT STORY</span>
+                <h2>How One Student Started a Campus Revolution</h2>
+                <p>Sarah, a college sophomore, used our Action Hub to organize her first campus clean-up. Within 3 months, she mobilized 200+ students and diverted 500kg of waste from landfills.</p>
+                <div class="story-metrics">
+                    <div>
+                        <span class="metric-number">200+</span>
+                        <span>Volunteers</span>
+                    </div>
+                    <div>
+                        <span class="metric-number">500kg</span>
+                        <span>Waste Collected</span>
+                    </div>
+                    <div>
+                        <span class="metric-number">15</span>
+                        <span>Events Organized</span>
+                    </div>
+                </div>
+                <a href="community.html#stories" class="btn btn-outline">Read More Stories</a>
+            </div>
+            <div class="story-image">
+                <div class="image-placeholder">🌿 Campus Clean-up</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Action Cards -->
+    <section class="quick-actions">
+        <h2 class="section-title">Take Action in 5 Minutes</h2>
+        <div class="actions-grid">
+            <div class="action-card small">
+                <i class="fas fa-pencil-alt"></i>
+                <h4>Sign a Petition</h4>
+                <p>Support local environmental policies</p>
+                <button class="btn-action" onclick="earnCredits(10)">Earn 10 Credits</button>
+            </div>
+            <div class="action-card small">
+                <i class="fas fa-calculator"></i>
+                <h4>Calculate Footprint</h4>
+                <p>Know your environmental impact</p>
+                <button class="btn-action" onclick="window.location.href='impact-tool.html'">Start Now</button>
+            </div>
+            <div class="action-card small">
+                <i class="fas fa-share-alt"></i>
+                <h4>Share a Tip</h4>
+                <p>Spread eco-friendly ideas</p>
+                <button class="btn-action" onclick="openTipModal()">Earn 5 Credits</button>
+            </div>
+            <div class="action-card small">
+                <i class="fas fa-calendar-check"></i>
+                <h4>Join Event</h4>
+                <p>Find local clean-ups</p>
+                <button class="btn-action" onclick="window.location.href='action-hub.html'">View Events</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter">
+        <div class="newsletter-container">
+            <h2>Stay Updated on Environmental News</h2>
+            <p>Get weekly tips, event notifications, and impact stories directly in your inbox.</p>
+            <form class="newsletter-form" id="newsletterForm">
+                <input type="email" placeholder="Enter your email address" required>
+                <button type="submit" class="btn btn-primary">Subscribe</button>
+            </form>
+            <p class="privacy-note">We care about your data. No spam, ever.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <div class="footer-logo">
+                    <i class="fas fa-leaf"></i>
+                    <span>EcoAction Hub</span>
+                </div>
+                <p>Empowering individuals to protect our planet through community action and education.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Our Methodology</a></li>
+                    <li><a href="#">Data Sources</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Get Involved</h4>
+                <ul>
+                    <li><a href="#">Volunteer</a></li>
+                    <li><a href="#">Partner With Us</a></li>
+                    <li><a href="#">Donate</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Green Tips</h4>
+                <p>Did you know? Turning off your faucet while brushing saves up to 8 gallons of water per day!</p>
+                <a href="#" class="tip-link">More tips →</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 EcoAction Hub. Made with ♥ for the planet. | This site is carbon-aware and hosted green</p>
+        </div>
+    </footer>
+
+    <!-- Tip Modal -->
+    <div id="tipModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Share Your Eco-Tip</h3>
+            <textarea id="tipInput" placeholder="What's your favorite way to help the environment?" rows="4"></textarea>
+            <button onclick="submitTip()" class="btn btn-primary">Submit Tip</button>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+    <script src="animations.js"></script>
+</body>
+</html>
+
+
+

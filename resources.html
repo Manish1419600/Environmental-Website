@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resources · GreenEarth Library</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ===== BASE & VARIABLES (from enhanced style) ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2ecc71;
+            --primary-dark: #27ae60;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --dark-color: #2c3e50;
+            --light-color: #ecf0f1;
+            --gray-color: #95a5a6;
+            --white: #ffffff;
+            --black: #333333;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 10px 20px rgba(0, 0, 0, 0.15);
+            --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-color);
+            overflow-x: hidden;
+            position: relative;
+            background: #f9fbfa;
+        }
+
+        /* ===== ANIMATED BACKGROUND ===== */
+        .floating-leaves {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .leaf {
+            position: absolute;
+            opacity: 0.1;
+            color: var(--primary-color);
+            font-size: 2rem;
+            animation: float-leaf linear infinite;
+        }
+
+        @keyframes float-leaf {
+            0% { transform: translateY(-100px) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.15; }
+            90% { opacity: 0.15; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            background: var(--primary-color);
+            border-radius: 50%;
+            opacity: 0.08;
+            animation: particle-float linear infinite;
+        }
+
+        @keyframes particle-float {
+            0% { transform: translateY(100vh) scale(0); opacity: 0; }
+            50% { opacity: 0.12; }
+            100% { transform: translateY(-100vh) scale(1); opacity: 0; }
+        }
+
+        /* ===== NAVIGATION ===== */
+        .navbar {
+            background: var(--white);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .logo i {
+            font-size: 2rem;
+            animation: rotate 10s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            position: relative;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-menu a:hover::after,
+        .nav-menu a.active::after {
+            width: 80%;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            color: var(--primary-color);
+        }
+
+        .hamburger {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* ===== PAGE HEADER ===== */
+        .resources-header {
+            background: linear-gradient(135deg, #1e8449, #117a65);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+            z-index: 5;
+            overflow: hidden;
+        }
+
+        .resources-header h1 {
+            font-size: 3.2rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .resources-header p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.95;
+        }
+
+        .header-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 2.5rem;
+        }
+
+        .stat-pill {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(6px);
+            padding: 0.8rem 2rem;
+            border-radius: 60px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        /* ===== SEARCH & FILTER ===== */
+        .search-section {
+            max-width: 1200px;
+            margin: 2rem auto 0;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .search-bar {
+            background: white;
+            border-radius: 60px;
+            padding: 0.3rem 0.3rem 0.3rem 1.8rem;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            border: 1px solid rgba(46,204,113,0.2);
+        }
+
+        .search-bar i {
+            color: var(--gray-color);
+            font-size: 1.2rem;
+        }
+
+        .search-bar input {
+            flex: 1;
+            padding: 1rem 0.8rem;
+            border: none;
+            font-size: 1rem;
+            background: transparent;
+            outline: none;
+        }
+
+        .search-bar button {
+            background: var(--primary-color);
+            border: none;
+            color: white;
+            padding: 0.9rem 2.2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .search-bar button:hover {
+            background: var(--primary-dark);
+            transform: scale(1.02);
+        }
+
+        .filter-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-top: 1.8rem;
+            justify-content: center;
+        }
+
+        .filter-btn {
+            background: white;
+            border: 1px solid #d5dbdb;
+            padding: 0.6rem 1.5rem;
+            border-radius: 40px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        /* ===== RESOURCES GRID ===== */
+        .resources-container {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem 4rem;
+            position: relative;
+            z-index: 5;
+        }
+
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .resource-card {
+            background: white;
+            border-radius: 24px;
+            box-shadow: var(--shadow);
+            padding: 1.8rem 1.5rem;
+            transition: var(--transition);
+            border: 1px solid rgba(0,0,0,0.03);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(2px);
+        }
+
+        .resource-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .resource-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(46,204,113,0.15);
+            color: var(--primary-dark);
+            font-weight: 600;
+            font-size: 0.8rem;
+            padding: 0.2rem 1rem;
+            border-radius: 30px;
+            border: 1px solid rgba(46,204,113,0.3);
+        }
+
+        .resource-icon {
+            width: 65px;
+            height: 65px;
+            background: rgba(46,204,113,0.08);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.2rem;
+            font-size: 2.4rem;
+            color: var(--primary-color);
+        }
+
+        .resource-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.6rem;
+        }
+
+        .resource-desc {
+            color: #4a5568;
+            margin-bottom: 1.2rem;
+            font-size: 0.95rem;
+        }
+
+        .resource-meta {
+            display: flex;
+            gap: 1.2rem;
+            color: var(--gray-color);
+            font-size: 0.9rem;
+            margin: 1rem 0;
+        }
+
+        .resource-meta i {
+            margin-right: 0.3rem;
+            color: var(--primary-color);
+        }
+
+        .resource-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1.2rem;
+            border-top: 1px solid #edf2f2;
+            padding-top: 1rem;
+        }
+
+        .resource-type {
+            background: #f0f7f0;
+            padding: 0.3rem 1rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--primary-dark);
+        }
+
+        .download-btn, .view-btn {
+            background: none;
+            border: none;
+            color: var(--primary-color);
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: 0.2s;
+            padding: 0.3rem 0.8rem;
+            border-radius: 40px;
+        }
+
+        .download-btn:hover, .view-btn:hover {
+            background: rgba(46,204,113,0.1);
+            transform: translateX(3px);
+        }
+
+        /* featured resources */
+        .featured-section {
+            background: linear-gradient(145deg, #e8f8f0, #d5f0e0);
+            border-radius: 40px;
+            padding: 2.5rem 2rem;
+            margin: 3rem 0 2rem;
+        }
+
+        .featured-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.8rem;
+            margin-top: 1.8rem;
+        }
+
+        .featured-item {
+            background: white;
+            border-radius: 28px;
+            padding: 1.8rem;
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+            box-shadow: var(--shadow);
+        }
+
+        .featured-icon {
+            background: rgba(46,204,113,0.2);
+            width: 70px;
+            height: 70px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--primary-dark);
+        }
+
+        /* categories */
+        .category-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.7rem;
+            margin: 2rem 0;
+        }
+
+        .category-tag {
+            background: white;
+            padding: 0.5rem 1.4rem;
+            border-radius: 40px;
+            border: 1px solid #c8e0d0;
+            font-weight: 500;
+            transition: 0.2s;
+            cursor: default;
+        }
+
+        .category-tag i {
+            color: var(--primary-color);
+            margin-right: 0.3rem;
+        }
+
+        /* ===== MODAL (preview) ===== */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: var(--white);
+            margin: 8% auto;
+            padding: 2rem;
+            border-radius: 30px;
+            max-width: 550px;
+            animation: modalSlideIn 0.3s ease;
+        }
+
+        @keyframes modalSlideIn {
+            from { transform: translateY(-40px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .close {
+            float: right;
+            font-size: 2.2rem;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        /* ===== NEWSLETTER (small) ===== */
+        .resource-newsletter {
+            background: var(--dark-color);
+            color: white;
+            border-radius: 50px;
+            padding: 2.5rem 3rem;
+            margin-top: 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .resource-newsletter h3 {
+            font-size: 1.7rem;
+        }
+
+        .inline-form {
+            display: flex;
+            gap: 0.5rem;
+            background: white;
+            padding: 0.3rem;
+            border-radius: 60px;
+        }
+
+        .inline-form input {
+            padding: 0.8rem 1.2rem;
+            border: none;
+            border-radius: 50px;
+            min-width: 250px;
+            outline: none;
+        }
+
+        .inline-form button {
+            background: var(--primary-color);
+            border: none;
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: var(--dark-color);
+            color: var(--white);
+            padding: 4rem 2rem 2rem;
+            position: relative;
+            z-index: 5;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .social-links a {
+            color: var(--white);
+            font-size: 1.5rem;
+            margin-right: 1.2rem;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        /* ===== UTILITIES ===== */
+        .reveal {
+            opacity: 0;
+            transition: all 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+        }
+
+        .fade-bottom {
+            transform: translateY(30px);
+        }
+
+        .fade-bottom.active {
+            transform: translateY(0);
+        }
+
+        .credits-display {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(46,204,113,0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            margin-left: 1rem;
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            color: white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            z-index: 3000;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            animation: slideInRight 0.3s ease;
+        }
+
+        .notification-success { background: var(--primary-color); }
+        .notification-error { background: var(--accent-color); }
+
+        @keyframes slideInRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        /* responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                background: white;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                padding: 2rem;
+            }
+            .nav-menu.active { display: flex; }
+            .hamburger { display: block; }
+            .featured-grid { grid-template-columns: 1fr; }
+            .resource-newsletter { flex-direction: column; text-align: center; }
+            .footer-container { grid-template-columns: 1fr; }
+            .floating-leaves, .particles { display: none; }
+            .header-stats { flex-direction: column; align-items: center; gap: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- animated background -->
+    <div class="floating-leaves"></div>
+    <div class="particles"></div>
+
+   <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+               <i class="fas fa-leaf"></i>
+               <span>EcoAction Hub</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="impact-tool.html">Impact Tool</a></li>
+                <li><a href="action-hub.html">Action Hub</a></li>
+                <li><a href="learning-portal.html">Learn</a></li>
+                <li><a href="community.html">Community</a></li>
+                <li><a href="resources.html" class="active">Resources</a></li>
+            </ul>
+            <div class="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- header -->
+    <section class="resources-header">
+        <h1 class="reveal fade-bottom">📚 Eco Library & Tools</h1>
+        <p class="reveal fade-bottom">Free guides, research, calculators and action kits for a sustainable life</p>
+        <div class="header-stats">
+            <span class="stat-pill"><i class="fas fa-file-pdf"></i> 45+ guides</span>
+            <span class="stat-pill"><i class="fas fa-video"></i> 20 videos</span>
+            <span class="stat-pill"><i class="fas fa-calculator"></i> 6 tools</span>
+        </div>
+    </section>
+
+    <!-- search & filter -->
+    <div class="search-section reveal fade-bottom">
+        <div class="search-bar">
+            <i class="fas fa-search"></i>
+            <input type="text" id="resourceSearch" placeholder="Search for guides, topics, tools..." onkeyup="filterResources()">
+            <button><i class="fas fa-filter"></i> Search</button>
+        </div>
+        <div class="filter-tabs">
+            <span class="filter-btn active" data-filter="all" onclick="setFilter('all')">All</span>
+            <span class="filter-btn" data-filter="guide" onclick="setFilter('guide')">📘 Guides</span>
+            <span class="filter-btn" data-filter="video" onclick="setFilter('video')">🎥 Videos</span>
+            <span class="filter-btn" data-filter="tool" onclick="setFilter('tool')">🛠️ Tools</span>
+            <span class="filter-btn" data-filter="research" onclick="setFilter('research')">📊 Research</span>
+        </div>
+    </div>
+
+    <!-- main resources container -->
+    <div class="resources-container">
+        <!-- featured resources -->
+        <div class="featured-section reveal fade-bottom">
+            <h2 style="display: flex; align-items: center; gap: 0.8rem;"><i class="fas fa-star" style="color: gold;"></i> Featured resources</h2>
+            <div class="featured-grid">
+                <div class="featured-item">
+                    <div class="featured-icon"><i class="fas fa-seedling"></i></div>
+                    <div>
+                        <h4>Zero waste starter kit</h4>
+                        <p style="color:#4a5568;">Checklist & printable guide</p>
+                        <button class="download-btn" onclick="downloadResource('Zero waste kit')"><i class="fas fa-download"></i> Download</button>
+                    </div>
+                </div>
+                <div class="featured-item">
+                    <div class="featured-icon"><i class="fas fa-calculator"></i></div>
+                    <div>
+                        <h4>Carbon footprint calculator</h4>
+                        <p style="color:#4a5568;">Interactive tool</p>
+                        <button class="view-btn" onclick="openToolModal('Carbon footprint')"><i class="fas fa-external-link-alt"></i> Launch</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- category cloud -->
+        <div class="category-cloud">
+            <span class="category-tag"><i class="fas fa-recycle"></i> Recycling</span>
+            <span class="category-tag"><i class="fas fa-tree"></i> Reforestation</span>
+            <span class="category-tag"><i class="fas fa-solar-panel"></i> Renewable energy</span>
+            <span class="category-tag"><i class="fas fa-water"></i> Ocean conservation</span>
+            <span class="category-tag"><i class="fas fa-bicycle"></i> Eco transport</span>
+        </div>
+
+        <!-- dynamic grid -->
+        <h2 style="margin: 2rem 0 0.5rem;"><i class="fas fa-book-open"></i> All resources</h2>
+        <div class="resources-grid" id="resourcesGrid">
+            <!-- filled by JS -->
+        </div>
+
+        <!-- newsletter mini -->
+        <div class="resource-newsletter reveal fade-bottom">
+            <h3><i class="fas fa-envelope-open-text"></i> Get new guides monthly</h3>
+            <div class="inline-form">
+                <input type="email" placeholder="your@email.com" id="resourceEmail">
+                <button onclick="subscribeResources()">Subscribe</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div><i class="fas fa-leaf fa-2x" style="color: var(--primary-color);"></i><p>© 2025 GreenEarth</p></div>
+            <div><h4>Explore</h4><ul><li>About</li><li>Blog</li></ul></div>
+            <div><h4>Join</h4><ul><li>Volunteer</li><li>Partners</li></ul></div>
+            <div class="social-links"><a href="#"><i class="fab fa-twitter"></i></a><a href="#"><i class="fab fa-instagram"></i></a></div>
+        </div>
+    </footer>
+
+    <!-- modal for tools / preview -->
+    <div id="toolModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeToolModal()">&times;</span>
+            <h3 id="toolModalTitle">🌱 Tool preview</h3>
+            <p style="margin: 1.5rem 0;">This interactive tool would open in a full version. (demo)</p>
+            <p>You earned <strong>3 green credits</strong> for exploring!</p>
+            <button class="btn btn-primary" style="width:100%;" onclick="closeToolModal()">Got it</button>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            // ---------- GLOBAL JS (main.js + animations) ----------
+            // mobile menu
+            const hamburger = document.querySelector('.hamburger');
+            const navMenu = document.querySelector('.nav-menu');
+            if (hamburger) {
+                hamburger.addEventListener('click', function() {
+                    navMenu.classList.toggle('active');
+                    const icon = this.querySelector('i');
+                    icon.classList.toggle('fa-bars');
+                    icon.classList.toggle('fa-times');
+                });
+            }
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.navbar') && navMenu?.classList.contains('active')) {
+                    navMenu.classList.remove('active');
+                    const icon = document.querySelector('.hamburger i');
+                    if (icon) { icon.classList.add('fa-bars'); icon.classList.remove('fa-times'); }
+                }
+            });
+
+            // notification
+            window.showNotification = function(message, type = 'info') {
+                const existing = document.querySelector('.notification');
+                if (existing) existing.remove();
+                const notif = document.createElement('div');
+                notif.className = `notification notification-${type}`;
+                notif.innerHTML = `<i class="fas ${type==='success'?'fa-check-circle':type==='error'?'fa-exclamation-circle':'fa-info-circle'}"></i><span>${message}</span>`;
+                document.body.appendChild(notif);
+                setTimeout(() => notif.remove(), 4000);
+            };
+
+            // credits
+            let userCredits = parseInt(localStorage.getItem('userCredits') || '0');
+            window.earnCredits = function(amount) {
+                userCredits += amount;
+                updateCreditsDisplay();
+                localStorage.setItem('userCredits', userCredits);
+                showNotification(`Earned ${amount} Green Credits! Total: ${userCredits}`, 'success');
+            };
+            function updateCreditsDisplay() {
+                let disp = document.querySelector('.credits-display');
+                if (!disp) {
+                    disp = document.createElement('div');
+                    disp.className = 'credits-display';
+                    disp.innerHTML = `<i class="fas fa-star" style="color: gold;"></i><span>${userCredits}</span>`;
+                    const menu = document.querySelector('.nav-menu');
+                    if (menu) menu.appendChild(disp);
+                } else {
+                    const span = disp.querySelector('span');
+                    if (span) span.textContent = userCredits;
+                }
+            }
+            updateCreditsDisplay();
+
+            // ---------- RESOURCES DATA ----------
+            const resourcesData = [
+                { title: 'Home composting guide', type: 'guide', category: 'waste', icon: 'fa-trash-alt', downloads: 1432, desc: 'Step-by-step to turn scraps into soil.', file: 'compost.pdf' },
+                { title: 'Plastic-free ocean', type: 'video', category: 'ocean', icon: 'fa-water', downloads: 876, desc: '20-min documentary about marine plastic.', file: 'ocean_video' },
+                { title: 'Solar panel calculator', type: 'tool', category: 'energy', icon: 'fa-sun', downloads: 3.2, desc: 'Estimate savings & payback time.', file: 'solar_tool' },
+                { title: 'Reforestation field manual', type: 'research', category: 'forest', icon: 'fa-tree', downloads: 644, desc: 'Best practices from global projects.', file: 'forest_manual.pdf' },
+                { title: 'Eco-anxiety workbook', type: 'guide', category: 'wellness', icon: 'fa-heart', downloads: 2100, desc: 'Mental health & climate action.', file: 'eco_anxiety.pdf' },
+                { title: 'Fast fashion impact', type: 'video', category: 'lifestyle', icon: 'fa-tshirt', downloads: 3450, desc: 'Why clothes matter.', file: 'fashion_video' },
+                { title: 'Community gardening toolkit', type: 'guide', category: 'food', icon: 'fa-carrot', downloads: 978, desc: 'Start a neighborhood garden.', file: 'garden_kit.pdf' },
+                { title: 'Carbon footprint API', type: 'tool', category: 'data', icon: 'fa-chart-line', downloads: 423, desc: 'For developers & researchers.', file: 'carbon_api' },
+            ];
+
+            let currentFilter = 'all';
+            let searchQuery = '';
+
+            function renderResources() {
+                const grid = document.getElementById('resourcesGrid');
+                if (!grid) return;
+                const filtered = resourcesData.filter(r => {
+                    if (currentFilter !== 'all' && r.type !== currentFilter) return false;
+                    if (searchQuery && !r.title.toLowerCase().includes(searchQuery.toLowerCase()) && !r.desc.toLowerCase().includes(searchQuery.toLowerCase())) return false;
+                    return true;
+                });
+                if (filtered.length === 0) {
+                    grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:3rem;">✨ No matching resources. Try another filter.</div>`;
+                    return;
+                }
+                grid.innerHTML = filtered.map(r => `
+                    <div class="resource-card reveal fade-bottom" data-type="${r.type}">
+                        <span class="resource-badge">${r.type}</span>
+                        <div class="resource-icon"><i class="fas ${r.icon}"></i></div>
+                        <h3>${r.title}</h3>
+                        <p class="resource-desc">${r.desc}</p>
+                        <div class="resource-meta"><span><i class="fas fa-download"></i> ${typeof r.downloads === 'number' ? r.downloads.toLocaleString() : r.downloads}k</span></div>
+                        <div class="resource-footer">
+                            <span class="resource-type"><i class="far fa-file"></i> ${r.type}</span>
+                            <button class="download-btn" onclick="handleResourceAction('${r.title}','${r.type}')"><i class="fas fa-download"></i> ${r.type==='tool'?'Try':'Download'}</button>
+                        </div>
+                    </div>
+                `).join('');
+                // re-run observer for new cards
+                observeReveals();
+            }
+
+            window.handleResourceAction = function(title, type) {
+                if (type === 'tool') {
+                    openToolModal(title);
+                    earnCredits(3);
+                } else {
+                    showNotification(`📥 "${title}" downloaded (demo). +2 credits`, 'success');
+                    earnCredits(2);
+                }
+            };
+
+            window.setFilter = function(filter) {
+                currentFilter = filter;
+                document.querySelectorAll('.filter-btn').forEach(btn => {
+                    btn.classList.toggle('active', btn.dataset.filter === filter);
+                });
+                renderResources();
+            };
+
+            window.filterResources = function() {
+                searchQuery = document.getElementById('resourceSearch').value;
+                renderResources();
+            };
+
+            // tool modal
+            window.openToolModal = function(title) {
+                document.getElementById('toolModalTitle').innerText = title + ' (demo)';
+                document.getElementById('toolModal').style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            };
+            window.closeToolModal = function() {
+                document.getElementById('toolModal').style.display = 'none';
+                document.body.style.overflow = '';
+            };
+            window.onclick = function(e) {
+                if (e.target.classList.contains('modal')) {
+                    e.target.style.display = 'none';
+                    document.body.style.overflow = '';
+                }
+            };
+
+            // newsletter subscribe
+            window.subscribeResources = function() {
+                const email = document.getElementById('resourceEmail').value.trim();
+                if (!email.includes('@')) { showNotification('Valid email please', 'error'); return; }
+                showNotification('Subscribed! Check your inbox.', 'success');
+                earnCredits(5);
+                document.getElementById('resourceEmail').value = '';
+            };
+
+            // download simulation
+            window.downloadResource = function(name) {
+                showNotification(`Downloading ${name}... (demo) +2 credits`, 'success');
+                earnCredits(2);
+            };
+
+            // ---------- ANIMATIONS (leaves, particles, reveal) ----------
+            function initBackground() {
+                if (window.innerWidth > 768) {
+                    const leavesDiv = document.querySelector('.floating-leaves');
+                    if (leavesDiv && leavesDiv.children.length === 0) {
+                        for (let i=0; i<14; i++) {
+                            const leaf = document.createElement('div');
+                            leaf.className = 'leaf';
+                            leaf.innerHTML = ['🍃','🌿','🍂','🌱','🍀'][Math.floor(Math.random()*5)];
+                            leaf.style.left = Math.random()*100+'%';
+                            leaf.style.animationDuration = (Math.random()*10+15)+'s';
+                            leaf.style.animationDelay = Math.random()*5+'s';
+                            leaf.style.fontSize = (Math.random()*20+15)+'px';
+                            leavesDiv.appendChild(leaf);
+                        }
+                    }
+                    const particlesDiv = document.querySelector('.particles');
+                    if (particlesDiv && particlesDiv.children.length === 0) {
+                        for (let i=0; i<25; i++) {
+                            const p = document.createElement('div');
+                            p.className = 'particle';
+                            p.style.left = Math.random()*100+'%';
+                            let size = (Math.random()*8+3)+'px';
+                            p.style.width = size; p.style.height = size;
+                            p.style.animationDuration = (Math.random()*15+10)+'s';
+                            p.style.animationDelay = Math.random()*5+'s';
+                            particlesDiv.appendChild(p);
+                        }
+                    }
+                }
+            }
+
+            function observeReveals() {
+                const reveals = document.querySelectorAll('.reveal');
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('active'); });
+                }, { threshold: 0.1 });
+                reveals.forEach(r => observer.observe(r));
+            }
+
+            // start
+            document.addEventListener('DOMContentLoaded', () => {
+                renderResources();
+                initBackground();
+                observeReveals();
+                // set active menu
+                document.querySelectorAll('.nav-menu a').forEach(a => {
+                    if (a.href.includes('resources.html')) a.classList.add('active');
+                });
+            });
+
+            window.addEventListener('beforeunload', () => {
+                localStorage.setItem('userCredits', userCredits);
+            });
+        })();
+    </script>
+    <!-- small style for active filter -->
+    <style>
+        .filter-btn.active { background: var(--primary-color); color: white; border-color: var(--primary-color); }
+        .btn-primary { background: var(--primary-color); border: none; color: white; padding: 0.8rem 2rem; border-radius: 40px; font-weight: 600; cursor: pointer; }
+    </style>
+</body>
+</html>

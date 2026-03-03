@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <meta name="theme-color" content="#2ecc71">
+    <title>Learning Portal - EcoAction Hub</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .learning-header {
+            background: linear-gradient(135deg, #3498db, #9b59b6);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .learning-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 50%);
+            animation: rotate 20s linear infinite;
+        }
+        
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .course-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            animation: slideInUp 0.5s ease;
+            animation-fill-mode: both;
+        }
+        
+        .course-card:nth-child(1) { animation-delay: 0.1s; }
+        .course-card:nth-child(2) { animation-delay: 0.2s; }
+        .course-card:nth-child(3) { animation-delay: 0.3s; }
+        
+        .course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+        }
+        
+        .course-image {
+            height: 150px;
+            background: linear-gradient(135deg, #27ae60, #2980b9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .course-image::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 50%);
+            animation: rotate 10s linear infinite;
+        }
+        
+        .course-body {
+            padding: 1.5rem;
+        }
+        
+        .course-meta {
+            display: flex;
+            gap: 1rem;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            margin: 1rem 0;
+        }
+        
+        .quiz-section {
+            max-width: 800px;
+            margin: 3rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .quiz-question {
+            margin-bottom: 2rem;
+            animation: slideInLeft 0.5s ease;
+        }
+        
+        .quiz-options {
+            display: grid;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .quiz-option {
+            padding: 1rem;
+            background: #f8f9fa;
+            border: 2px solid #ecf0f1;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: zoomIn 0.5s ease;
+            animation-fill-mode: both;
+        }
+        
+        .quiz-option:nth-child(1) { animation-delay: 0.1s; }
+        .quiz-option:nth-child(2) { animation-delay: 0.2s; }
+        .quiz-option:nth-child(3) { animation-delay: 0.3s; }
+        .quiz-option:nth-child(4) { animation-delay: 0.4s; }
+        
+        .quiz-option:hover {
+            background: #e8f5e9;
+            border-color: #27ae60;
+            transform: translateX(10px);
+        }
+        
+        .quiz-option.selected {
+            background: #27ae60;
+            color: white;
+            border-color: #27ae60;
+        }
+        
+        .glossary-term {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 5px;
+            margin-bottom: 0.5rem;
+            border-left: 4px solid #27ae60;
+            transition: all 0.3s ease;
+            animation: slideInRight 0.5s ease;
+            animation-fill-mode: both;
+        }
+        
+        .glossary-term:hover {
+            transform: translateX(10px);
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+             <a href="index.html" class="logo">
+               <i class="fas fa-leaf"></i>
+               <span>EcoAction Hub</span>
+            </a>
+
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="impact-tool.html">Impact Tool</a></li>
+                <li><a href="action-hub.html">Action Hub</a></li>
+                <li><a href="learning-portal.html" class="active">Learn</a></li>
+                <li><a href="community.html">Community</a></li>
+                <li><a href="resources.html">Resources</a></li>
+            </ul>
+            <div class="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="learning-header">
+        <h1 class="glow">Learn About Environmental Science</h1>
+        <p>Interactive courses, quizzes, and resources for all ages</p>
+    </div>
+    
+    <h2 style="text-align: center; margin: 2rem 0;">Featured Courses</h2>
+    <div class="course-grid">
+        <div class="course-card">
+            <div class="course-image">🌊</div>
+            <div class="course-body">
+                <h3>Ocean Conservation 101</h3>
+                <p>Learn about marine ecosystems, pollution, and how to protect our oceans.</p>
+                <div class="course-meta">
+                    <span><i class="fas fa-clock"></i> 2 hours</span>
+                    <span><i class="fas fa-signal"></i> Beginner</span>
+                </div>
+                <button class="btn-action" style="width: 100%;" onclick="showNotification('Course started!', 'success')">Start Learning</button>
+            </div>
+        </div>
+        
+        <div class="course-card">
+            <div class="course-image">🌱</div>
+            <div class="course-body">
+                <h3>Sustainable Living</h3>
+                <p>Practical tips for reducing waste and living more sustainably.</p>
+                <div class="course-meta">
+                    <span><i class="fas fa-clock"></i> 1.5 hours</span>
+                    <span><i class="fas fa-signal"></i> All Levels</span>
+                </div>
+                <button class="btn-action" style="width: 100%;" onclick="showNotification('Course started!', 'success')">Start Learning</button>
+            </div>
+        </div>
+        
+        <div class="course-card">
+            <div class="course-image">🌍</div>
+            <div class="course-body">
+                <h3>Climate Science Basics</h3>
+                <p>Understand climate change causes, impacts, and solutions.</p>
+                <div class="course-meta">
+                    <span><i class="fas fa-clock"></i> 3 hours</span>
+                    <span><i class="fas fa-signal"></i> Intermediate</span>
+                </div>
+                <button class="btn-action" style="width: 100%;" onclick="showNotification('Course started!', 'success')">Start Learning</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="quiz-section">
+        <h2 style="margin-bottom: 1rem;">Quick Quiz: Test Your Knowledge</h2>
+        <div class="quiz-question">
+            <h3>1. What is the primary greenhouse gas emitted by human activities?</h3>
+            <div class="quiz-options">
+                <div class="quiz-option" onclick="selectOption(this)">A. Methane (CH₄)</div>
+                <div class="quiz-option" onclick="selectOption(this)">B. Carbon Dioxide (CO₂)</div>
+                <div class="quiz-option" onclick="selectOption(this)">C. Nitrous Oxide (N₂O)</div>
+                <div class="quiz-option" onclick="selectOption(this)">D. Ozone (O₃)</div>
+            </div>
+        </div>
+        
+        <div class="quiz-question">
+            <h3>2. Which of these is a renewable energy source?</h3>
+            <div class="quiz-options">
+                <div class="quiz-option" onclick="selectOption(this)">A. Coal</div>
+                <div class="quiz-option" onclick="selectOption(this)">B. Natural Gas</div>
+                <div class="quiz-option" onclick="selectOption(this)">C. Solar Power</div>
+                <div class="quiz-option" onclick="selectOption(this)">D. Nuclear</div>
+            </div>
+        </div>
+        
+        <button onclick="checkQuiz()" class="btn btn-primary" style="margin-top: 1rem;">Submit Answers</button>
+    </div>
+    
+    <div style="max-width: 800px; margin: 3rem auto; padding: 2rem;">
+        <h2 style="margin-bottom: 2rem;">Environmental Glossary</h2>
+        <div class="glossary-term">
+            <h4>Carbon Footprint</h4>
+            <p>The total amount of greenhouse gases generated by our actions.</p>
+        </div>
+        <div class="glossary-term">
+            <h4>Biodiversity</h4>
+            <p>The variety of plant and animal life in the world or in a particular habitat.</p>
+        </div>
+        <div class="glossary-term">
+            <h4>Renewable Energy</h4>
+            <p>Energy from sources that are naturally replenishing such as sunlight, wind, and water.</p>
+        </div>
+        <div class="glossary-term">
+            <h4>Sustainable Development</h4>
+            <p>Development that meets present needs without compromising future generations.</p>
+        </div>
+    </div>
+    
+    <footer class="footer">
+        <!-- Same footer as index.html -->
+    </footer>
+    
+    <script>
+        function selectOption(element) {
+            const options = element.parentElement.querySelectorAll('.quiz-option');
+            options.forEach(opt => opt.classList.remove('selected'));
+            element.classList.add('selected');
+        }
+        
+        function checkQuiz() {
+            showNotification('Quiz submitted! +10 Green Credits', 'success');
+            earnCredits(10);
+        }
+    </script>
+    
+    <script src="main.js"></script>
+    <script src="animations.js"></script>
+</body>
+</html>

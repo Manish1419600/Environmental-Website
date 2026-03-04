@@ -7,6 +7,9 @@
     <title>Learning Portal - EcoAction Hub</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
         .learning-header {
             background: linear-gradient(135deg, #3498db, #9b59b6);
@@ -226,30 +229,161 @@
         </div>
     </div>
     
-    <div class="quiz-section">
-        <h2 style="margin-bottom: 1rem;">Quick Quiz: Test Your Knowledge</h2>
-        <div class="quiz-question">
-            <h3>1. What is the primary greenhouse gas emitted by human activities?</h3>
-            <div class="quiz-options">
-                <div class="quiz-option" onclick="selectOption(this)">A. Methane (CH₄)</div>
-                <div class="quiz-option" onclick="selectOption(this)">B. Carbon Dioxide (CO₂)</div>
-                <div class="quiz-option" onclick="selectOption(this)">C. Nitrous Oxide (N₂O)</div>
-                <div class="quiz-option" onclick="selectOption(this)">D. Ozone (O₃)</div>
-            </div>
-        </div>
-        
-        <div class="quiz-question">
-            <h3>2. Which of these is a renewable energy source?</h3>
-            <div class="quiz-options">
-                <div class="quiz-option" onclick="selectOption(this)">A. Coal</div>
-                <div class="quiz-option" onclick="selectOption(this)">B. Natural Gas</div>
-                <div class="quiz-option" onclick="selectOption(this)">C. Solar Power</div>
-                <div class="quiz-option" onclick="selectOption(this)">D. Nuclear</div>
-            </div>
-        </div>
-        
-        <button onclick="checkQuiz()" class="btn btn-primary" style="margin-top: 1rem;">Submit Answers</button>
+   <div class="quiz-section">
+    <h2>Quick Quiz: Test Your Knowledge</h2>
+
+    <!-- 1 -->
+     <div class="quiz-question">
+<h3>1. What is the main cause of global warming?</h3>
+<div class="quiz-options">
+<div class="quiz-option" onclick="selectOption(this)">Deforestation</div>
+<div class="quiz-option" onclick="selectOption(this)">Burning fossil fuels</div>
+<div class="quiz-option" onclick="selectOption(this)">Ocean tides</div>
+<div class="quiz-option" onclick="selectOption(this)">Volcanic eruptions</div>
+</div>
+</div>
+
+<!-- 2 -->
+<div class="quiz-question">
+<h3>2. Which gas is mainly responsible for the greenhouse effect?</h3>
+<div class="quiz-options">
+<div class="quiz-option" onclick="selectOption(this)">Oxygen</div>
+<div class="quiz-option" onclick="selectOption(this)">Nitrogen</div>
+<div class="quiz-option" onclick="selectOption(this)">Carbon Dioxide</div>
+<div class="quiz-option" onclick="selectOption(this)">Hydrogen</div>
+</div>
+</div>
+
+<!-- 3 -->
+<div class="quiz-question">
+<h3>3. What does the 3R principle stand for?</h3>
+<div class="quiz-options">
+<div class="quiz-option" onclick="selectOption(this)">Reduce, Reuse, Recycle</div>
+<div class="quiz-option" onclick="selectOption(this)">Remove, Replace, Rebuild</div>
+<div class="quiz-option" onclick="selectOption(this)">Recycle, Restore, Renew</div>
+<div class="quiz-option" onclick="selectOption(this)">Recover, Replant, Reuse</div>
+</div>
+</div>
+
+<!-- 4 -->
+<div class="quiz-question">
+<h3>4. Which of the following is renewable energy?</h3>
+<div class="quiz-options">
+<div class="quiz-option" onclick="selectOption(this)">Coal</div>
+<div class="quiz-option" onclick="selectOption(this)">Petroleum</div>
+<div class="quiz-option" onclick="selectOption(this)">Solar Energy</div>
+<div class="quiz-option" onclick="selectOption(this)">Natural Gas</div>
+</div>
+</div>
+
+<!-- 5 -->
+<div class="quiz-question">
+<h3>5. Deforestation mainly affects?</h3>
+<div class="quiz-options">
+<div class="quiz-option" onclick="selectOption(this)">Sound levels</div>
+<div class="quiz-option" onclick="selectOption(this)">Biodiversity</div>
+<div class="quiz-option" onclick="selectOption(this)">Cloud formation</div>
+<div class="quiz-option" onclick="selectOption(this)">Moonlight</div>
+</div>
+</div>
+
+<!-- 6 -->
+<div class="quiz-question">
+<h3>6. What is the biggest source of ocean pollution?</h3>
+<div class="quiz-options">
+<div class="quiz-option" onclick="selectOption(this)">Plastic waste</div>
+<div class="quiz-option" onclick="selectOption(this)">Sea salt</div>
+<div class="quiz-option" onclick="selectOption(this)">Fish waste</div>
+<div class="quiz-option" onclick="selectOption(this)">Coral reefs</div>
+</div>
+</div>
+
+<!-- 7 -->
+<div class="quiz-question">
+<h3>7. Planting trees helps to:</h3>
+<div class="quiz-options">
+<div class="quiz-option" onclick="selectOption(this)">Increase pollution</div>
+<div class="quiz-option" onclick="selectOption(this)">Absorb carbon dioxide</div>
+<div class="quiz-option" onclick="selectOption(this)">Raise temperature</div>
+<div class="quiz-option" onclick="selectOption(this)">Reduce oxygen</div>
+</div>
+</div>
+
+<!-- 8 -->
+<div class="quiz-question">
+<h3>8. Which action saves water?</h3>
+<div class="quiz-options">
+<div class="quiz-option" onclick="selectOption(this)">Leaving tap open</div>
+<div class="quiz-option" onclick="selectOption(this)">Fixing leaks</div>
+<div class="quiz-option" onclick="selectOption(this)">Washing car daily</div>
+<div class="quiz-option" onclick="selectOption(this)">Overwatering plants</div>
+</div>
+</div>
+
+<!-- 9 -->
+<div class="quiz-question">
+<h3>9. Which contributes most to air pollution?</h3>
+<div class="quiz-options">
+<div class="quiz-option" onclick="selectOption(this)">Cycling</div>
+<div class="quiz-option" onclick="selectOption(this)">Factory emissions</div>
+<div class="quiz-option" onclick="selectOption(this)">Electric cars</div>
+<div class="quiz-option" onclick="selectOption(this)">Planting trees</div>
+</div>
+</div>
+
+<!-- 10 -->
+<div class="quiz-question">
+<h3>10. Sustainable development means?</h3>
+<div class="quiz-options">
+<div class="quiz-option" onclick="selectOption(this)">Using resources quickly</div>
+<div class="quiz-option" onclick="selectOption(this)">Meeting present needs without harming future</div>
+<div class="quiz-option" onclick="selectOption(this)">Stopping all industries</div>
+<div class="quiz-option" onclick="selectOption(this)">Ignoring pollution</div>
+</div>
+</div>
+
+<!-- 11 -->
+<div class="quiz-question">
+<h3>11. Which global body works on climate agreements?</h3>
+<div class="quiz-options">
+<div class="quiz-option" onclick="selectOption(this)">WHO</div>
+<div class="quiz-option" onclick="selectOption(this)">United Nations</div>
+<div class="quiz-option" onclick="selectOption(this)">FIFA</div>
+<div class="quiz-option" onclick="selectOption(this)">WTO</div>
+</div>
+</div>
+
+<!-- 12 -->
+<div class="quiz-question">
+<h3>12. Which reduces carbon footprint?</h3>
+<div class="quiz-options">
+<div class="quiz-option" onclick="selectOption(this)">Using public transport</div>
+<div class="quiz-option" onclick="selectOption(this)">Burning waste</div>
+<div class="quiz-option" onclick="selectOption(this)">Driving alone daily</div>
+<div class="quiz-option" onclick="selectOption(this)">Using plastic bags</div>
+</div>
+</div>
+
+    <button onclick="checkQuiz()" class="btn btn-primary">Submit Answers</button>
+
+    <h3 id="result" style="margin-top:20px;"></h3>
+    <h4 id="badge"></h4>
+
+    <canvas id="resultChart" style="margin-top:20px;"></canvas>
+
+    <input type="text" id="username" placeholder="Enter name for certificate" style="margin-top:15px; padding:8px; width:100%;">
+
+    <button onclick="generateCertificate()" class="btn btn-success" style="margin-top:10px; width:100%;">🏆 Download Certificate</button>
+
+    <div id="leaderboard" style="margin-top:30px;"></div>
+
+    <div style="margin-top:30px; text-align:center;">
+      <h3>🌱 Take the Green Pledge</h3>
+      <p>I pledge to reduce waste, conserve energy, and protect nature.</p>
+      <button onclick="takePledge()" class="btn btn-primary">I Take the Pledge</button>
+      <p id="pledgeMessage" style="margin-top:10px;"></p>
     </div>
+</div>
     
     <div style="max-width: 800px; margin: 3rem auto; padding: 2rem;">
         <h2 style="margin-bottom: 2rem;">Environmental Glossary</h2>
@@ -275,18 +409,144 @@
         <!-- Same footer as index.html -->
     </footer>
     
-    <script>
-        function selectOption(element) {
-            const options = element.parentElement.querySelectorAll('.quiz-option');
-            options.forEach(opt => opt.classList.remove('selected'));
-            element.classList.add('selected');
+   <script>
+let score = 0;
+let totalQuestions = 12;
+let chartInstance = null;
+
+function selectOption(element) {
+    const options = element.parentElement.querySelectorAll('.quiz-option');
+    options.forEach(opt => opt.classList.remove('selected'));
+    element.classList.add('selected');
+}
+
+function checkQuiz() {
+    score = 0;
+    const questions = document.querySelectorAll('.quiz-question');
+    const correctAnswers = [1,2,0,2,1,0,1,1,1,1,1,0];
+
+    questions.forEach((question, index) => {
+        const options = question.querySelectorAll('.quiz-option');
+        options.forEach((option, i) => {
+            if(option.classList.contains('selected') && i === correctAnswers[index]) {
+                score++;
+            }
+        });
+    });
+
+    let percentage = (score / totalQuestions) * 100;
+
+    document.getElementById("result").innerHTML =
+        "📊 Your Environmental Awareness Score: " + percentage + "%";
+
+    assignBadge(percentage);
+    generateChart(score, totalQuestions - score);
+    saveScore(percentage);
+    updateLeaderboard();
+
+    if(typeof earnCredits === "function"){
+        earnCredits(10);
+    }
+}
+
+function assignBadge(percentage) {
+    let badgeText = "";
+    if(percentage >= 80) badgeText = "🏆 Gold Eco Warrior";
+    else if(percentage >= 50) badgeText = "🥈 Silver Eco Supporter";
+    else badgeText = "🥉 Bronze Eco Beginner";
+
+    document.getElementById("badge").innerHTML = badgeText;
+}
+
+function generateChart(correct, wrong) {
+    const ctx = document.getElementById('resultChart').getContext('2d');
+
+    if(chartInstance){
+        chartInstance.destroy();
+    }
+
+    chartInstance = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: ['Correct', 'Wrong'],
+            datasets: [{
+                data: [correct, wrong],
+                backgroundColor: ['#27ae60', '#e74c3c']
+            }]
         }
-        
-        function checkQuiz() {
-            showNotification('Quiz submitted! +10 Green Credits', 'success');
-            earnCredits(10);
-        }
-    </script>
+    });
+}
+
+function saveScore(newScore) {
+    let bestScore = localStorage.getItem("ecoBestScore");
+    if(!bestScore || newScore > bestScore){
+        localStorage.setItem("ecoBestScore", newScore);
+    }
+}
+
+function updateLeaderboard() {
+    let leaderboardDiv = document.getElementById("leaderboard");
+    let bestScore = localStorage.getItem("ecoBestScore") || 0;
+
+    leaderboardDiv.innerHTML =
+        "<h3>🏅 Leaderboard</h3>" +
+        "<p>Your Best Score: <strong>" + bestScore + "%</strong></p>";
+}
+
+function takePledge() {
+    document.getElementById("pledgeMessage").innerHTML =
+        "✅ Thank you for protecting our planet! +5 Green Credits";
+
+    if(typeof earnCredits === "function"){
+        earnCredits(5);
+    }
+}
+  
+    function generateCertificate() {
+    const name = document.getElementById("username").value;
+    if(name === "") return alert("Enter name!");
+
+    const certificateHTML = `
+        <div id="certificate" style="
+            width:800px;
+            padding:40px;
+            text-align:center;
+            border:10px solid #27ae60;
+            font-family:Arial;
+            background:white;
+        ">
+            <h1>🏆 Certificate of Environmental Awareness</h1>
+            <h2>This is proudly awarded to</h2>
+            <h1>${name}</h1>
+            <p>For successfully completing the Environmental Quiz</p>
+            <h3>Score: ${score}/${totalQuestions}</h3>
+            <h3>EcoAction Hub</h3>
+        </div>
+    `;
+
+    const tempDiv = document.createElement("div");
+    tempDiv.innerHTML = certificateHTML;
+    document.body.appendChild(tempDiv);
+
+    html2canvas(document.getElementById("certificate")).then(canvas => {
+        const imgData = canvas.toDataURL("image/png");
+
+        // Download as image
+        const link = document.createElement("a");
+        link.href = imgData;
+        link.download = "Eco_Certificate.png";
+        link.click();
+
+        // Download as PDF
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+        doc.addImage(imgData, 'PNG', 10, 10, 190, 120);
+        doc.save("Eco_Certificate.pdf");
+
+        tempDiv.remove();
+    });
+}
+</script>
     
     <script src="main.js"></script>
     <script src="animations.js"></script>

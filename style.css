@@ -1004,4 +1004,46 @@ a.logo {
         transition-duration: 0.01ms !important;
         scroll-behavior: auto !important;
     }
+
+}
+
+/* Project Report Section */
+
+.project-report{
+padding:80px 10%;
+background:#f7fdf9;
+}
+
+.report-container{
+max-width:1100px;
+margin:auto;
+}
+
+.report-block{
+background:white;
+padding:30px;
+margin-bottom:30px;
+border-radius:10px;
+box-shadow:0 5px 15px rgba(0,0,0,0.08);
+}
+
+.report-block h3{
+color:#27ae60;
+margin-bottom:15px;
+font-size:24px;
+}
+
+.report-block p{
+line-height:1.7;
+margin-bottom:15px;
+color:#444;
+}
+
+.suggestions-list{
+padding-left:20px;
+}
+
+.suggestions-list li{
+margin-bottom:10px;
+line-height:1.6;
 }
